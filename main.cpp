@@ -13,13 +13,13 @@ int main(int argc, const char** argv)
 {
   clewInit(L"opencl.dll");
 
-  std::vector<int2> data(1024 * 1024); // 1024*1024*16
+  std::vector<int2> data(1024*1024*16); // 1024*1024*16
 
   std::cout << "initialising data ... " << std::endl;
 
   for (int i = 0; i < data.size(); i++)
   {
-    data[i].x = (rand()*rand());
+    data[i].x = (rand() + 100*rand());
     data[i].y = i;
   }
 
@@ -47,8 +47,8 @@ int main(int argc, const char** argv)
   {
     std::vector<PlatformDevPair> devList = listAllOpenCLDevices();
 
-    auto device   = devList[1].dev;
-    auto platform = devList[1].platform;
+    auto device   = devList[0].dev;
+    auto platform = devList[0].platform;
 
     cl_int ciErr1 = CL_SUCCESS;
     auto ctx = clCreateContext(0, 1, &device, NULL, NULL, &ciErr1);
