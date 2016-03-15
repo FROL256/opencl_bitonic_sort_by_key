@@ -1,7 +1,7 @@
 {
   "name": "OpenCL Bitonic Sort By Key",
   "tagline": "OpenCL; sort; fast; simple; windows;",
-  "body": "### Simple OpenCL Bitonic Sort. \r\n\r\n* Sorting values by keys\r\n* Fast; 8ms for 1M numbers, 207ms for 16M numbers on HD7970 (or may be 7950, even don't know exactly)\r\n* Fast; 13ms for 1M numbers, 307ms for 16M numbers on GTX670\r\n* Easy to integrate in existing opencl code\r\n* Pure OpenCL API\r\n* NO CMAKE\r\n* NO BOOST\r\n* NO cl.hpp\r\n* NO other stupid frameworks\r\n* NO additional memory allocations\r\n* Any key type is possible, easy to change \r\n* O(N*log(N)*log(N))\r\n* JUST WORKING AND FAST SORT, JUST TAKE AND USE!\r\n",
+  "body": "### Simple OpenCL Bitonic Sort. \r\n\r\n* Sorting values by keys\r\n* Fast; 8ms for 1M numbers, 207ms for 16M numbers on HD7970 (or may be 7950, even don't know exactly)\r\n* Fast; 13ms for 1M numbers, 307ms for 16M numbers on GTX670\r\n* Easy to integrate in existing opencl code\r\n* Pure OpenCL API\r\n* NO CMAKE\r\n* NO BOOST\r\n* NO cl.hpp\r\n* NO other stupid frameworks\r\n* NO additional memory allocations\r\n* Any key type is possible, easy to change \r\n* O( N * log(N) * log(N) )\r\n* JUST WORKING AND FAST SORT, JUST TAKE AND USE!\r\n",
   "google": "",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
