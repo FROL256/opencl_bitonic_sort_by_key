@@ -68,6 +68,8 @@ int main(int argc, const char** argv)
 
     cl_kernel bitonicPassK = bitonicProgs.kernel("bitonic_pass_kernel");
     cl_kernel bitonicOpt   = bitonicProgs.kernel("bitonic_512");
+    cl_kernel bitonicOpt2  = bitonicProgs.kernel("bitonic_1024");
+    cl_kernel bitonicOpt3  = bitonicProgs.kernel("bitonic_2048");
 
     auto gpuData = clCreateBuffer(ctx, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int2)*data3.size(), &data3[0], &ciErr1);
 
@@ -81,10 +83,12 @@ int main(int argc, const char** argv)
 
     {
       BitonicCLArgs args;
+      args.dev          = device;
       args.cmdQueue     = cmdQueue;
       args.bitonicPassK = bitonicPassK;
       args.bitonic512   = nullptr;  // bitonic_sort_gpu_simple don't use shmem kernel
-
+      args.bitonic1024  = nullptr;  // bitonic_sort_gpu_simple don't use shmem kernel
+      args.bitonic2048  = nullptr;
       bitonic_sort_gpu_simple(gpuData, int(data2.size()), args);
     }
 
@@ -109,9 +113,9 @@ int main(int argc, const char** argv)
     }
 
     if (passed)
-      std::cout << "gpu test sort simple PASSED!" << std::endl;
+      std::cout << "gpu test sort simple\tPASSED!" << std::endl;
     else
-      std::cout << "gpu test sort simple FAILED! (" << faileId << ")" << std::endl;
+      std::cout << "gpu test sort simple\tFAILED! (" << faileId << ")" << std::endl;
 
     // 
     //
@@ -123,9 +127,12 @@ int main(int argc, const char** argv)
 
     {
       BitonicCLArgs args;
-      args.cmdQueue = cmdQueue;
+      args.dev          = device;
+      args.cmdQueue     = cmdQueue;
       args.bitonicPassK = bitonicPassK;
-      args.bitonic512 = bitonicOpt;
+      args.bitonic512   = bitonicOpt;
+      args.bitonic1024  = bitonicOpt2;
+      args.bitonic2048  = bitonicOpt3;
 
       bitonic_sort_gpu(gpuData, int(data3.size()), args);
     }
@@ -151,9 +158,9 @@ int main(int argc, const char** argv)
     }
 
     if (passed2)
-      std::cout << "gpu test sort opt PASSED!" << std::endl;
+      std::cout << "gpu test sort opt\tPASSED!" << std::endl;
     else
-      std::cout << "gpu test sort opt FAILED! (" << faileId << ")" << std::endl;
+      std::cout << "gpu test sort opt\tFAILED! (" << faileId << ")" << std::endl;
 
     std::cout << std::endl;
     std::cout << "[CPU]: std::sort time      = " << time1 << " ms" << std::endl;
